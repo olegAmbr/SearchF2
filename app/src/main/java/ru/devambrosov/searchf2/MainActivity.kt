@@ -3,13 +3,16 @@ package ru.devambrosov.searchf2
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewbinding.ViewBinding
 import ru.devambrosov.searchf2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    private val binding = ActivityMainBinding.inflate(layoutInflater)
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
         initButtons()
     }
 
