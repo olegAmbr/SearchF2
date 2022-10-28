@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">SearchF2</string>
-    <string name="btn_1">Меню</string>
-    <string name="btn_2">Избранное</string>
-    <string name="btn_3">Категории</string>
-    <string name="btn_4">Продолжить просмотр</string>
-    <string name="btn_5">Настройки</string>
+    <string name="menu">Меню</string>
+    <string name="favorites">Избранное</string>
+    <string name="category">Категории</string>
+    <string name="continue_watching">Продолжить просмотр</string>
+    <string name="settings">Настройки</string>
     <string name="menu_settings_title">settings</string>
 </resources>
