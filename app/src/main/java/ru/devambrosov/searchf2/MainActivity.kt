@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        initButtons()
+        //initButtons()
 
         binding.topAppBarMenu.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.watch_later -> {
-                    Toast.makeText(this, "Латегории", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Категории", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.selections -> {
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun initButtons() {
+   /* private fun initButtons() {
         binding.button1.setOnClickListener {
              Toast.makeText(this, "Меню", Toast.LENGTH_SHORT).show()
         }
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
         }
 
-    }
+    } */
 
 
 }
