@@ -74,7 +74,7 @@
         android:autoLink="web"
         android:linksClickable="true"
         android:text="Изображения с: https://www.movieposters.com/"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filmMenu" />
@@ -95,7 +95,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/pirates"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="15dp">
             <ImageView
@@ -108,7 +108,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/monroe"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="15dp">
             <ImageView
@@ -121,7 +121,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/friends"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="15dp">
             <ImageView
@@ -132,9 +132,9 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/black_panter"
+            android:id="@+id/blackPanter"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="15dp">
             <ImageView
@@ -156,9 +156,6 @@
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

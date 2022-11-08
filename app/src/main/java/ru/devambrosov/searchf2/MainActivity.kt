@@ -1,6 +1,10 @@
 package ru.devambrosov.searchf2
 
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.Animation.AnimationListener
+import android.widget.GridLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import ru.devambrosov.searchf2.databinding.ActivityMainBinding
@@ -12,7 +16,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        //initButtons()
+        val cardAnimation = AnimationUtils.loadAnimation(this, R.anim.)
+        view.startAnimation(cardAnimation)
+        //initCards()
 
         binding.topAppBarMenu.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -42,24 +48,26 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+
+
     }
 
 
-   /* private fun initButtons() {
-        binding.button1.setOnClickListener {
+
+
+   /* private fun initCards() {
+        binding.pirates.setOnClickListener {
              Toast.makeText(this, "Меню", Toast.LENGTH_SHORT).show()
         }
-        binding.button2.setOnClickListener {
+        binding.monroe.setOnClickListener {
             Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
         }
-        binding.button3.setOnClickListener {
+        binding.friends.setOnClickListener {
             Toast.makeText(this, "Категории", Toast.LENGTH_SHORT).show()
         }
-        binding.button4.setOnClickListener {
+        binding.blackPanter.setOnClickListener {
             Toast.makeText(this, "Продолжить просмотр", Toast.LENGTH_SHORT).show()
-        }
-        binding.button5.setOnClickListener {
-            Toast.makeText(this, "Настройки", Toast.LENGTH_SHORT).show()
         }
 
     } */
