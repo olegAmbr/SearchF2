@@ -39,7 +39,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutAnimation="@anim/layout_animation">
 
             <ImageView
                 android:id="@+id/draw1"
@@ -73,6 +74,7 @@
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:linksClickable="true"
+        android:stateListAnimator="@animator/press_button_anim"
         android:text="Изображения с: https://www.movieposters.com/"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +88,7 @@
         android:columnCount="2"
         android:orientation="horizontal"
         android:useDefaultMargins="true"
-        android:layoutAnimation="@anim/layout_anim"
+        android:layoutAnimation="@anim/layout_animation"
         app:layout_constraintTop_toBottomOf="@+id/text_reference"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -97,7 +99,9 @@
             android:layout_width="150dp"
             android:layout_height="170dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/press_button_anim">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -110,7 +114,9 @@
             android:layout_width="150dp"
             android:layout_height="170dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/press_button_anim">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -123,7 +129,9 @@
             android:layout_width="150dp"
             android:layout_height="170dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/press_button_anim">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -136,7 +144,9 @@
             android:layout_width="150dp"
             android:layout_height="170dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/press_button_anim">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

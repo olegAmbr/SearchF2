@@ -1,12 +1,10 @@
 package ru.devambrosov.searchf2
 
 import android.os.Bundle
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.view.animation.Animation.AnimationListener
-import android.widget.GridLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import ru.devambrosov.searchf2.R.anim.card_anim
 import ru.devambrosov.searchf2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,8 +14,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val cardAnimation = AnimationUtils.loadAnimation(this, R.anim.)
-        view.startAnimation(cardAnimation)
+
+        //val cardAnimation = AnimationUtils.loadAnimation(this, card_anim)
+        //view.startAnimation(cardAnimation)
+
         //initCards()
 
         binding.topAppBarMenu.setOnMenuItemClickListener {
