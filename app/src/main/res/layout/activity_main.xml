@@ -39,7 +39,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layoutAnimation="@anim/layout_animation">
 
             <ImageView
                 android:id="@+id/draw1"
@@ -73,8 +74,9 @@
         android:layout_height="wrap_content"
         android:autoLink="web"
         android:linksClickable="true"
+        android:stateListAnimator="@animator/press_button_anim"
         android:text="Изображения с: https://www.movieposters.com/"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/filmMenu" />
@@ -86,7 +88,7 @@
         android:columnCount="2"
         android:orientation="horizontal"
         android:useDefaultMargins="true"
-        android:layoutAnimation="@anim/layout_anim"
+        android:layoutAnimation="@anim/layout_animation"
         app:layout_constraintTop_toBottomOf="@+id/text_reference"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -95,9 +97,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/pirates"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/press_button_anim">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -108,9 +112,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/monroe"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/press_button_anim">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -121,9 +127,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/friends"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/press_button_anim">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -132,11 +140,13 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/black_panter"
+            android:id="@+id/blackPanter"
             android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_height="170dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="15dp">
+            app:cardElevation="15dp"
+            android:clickable="true"
+            android:stateListAnimator="@animator/press_button_anim">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -156,9 +166,6 @@
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
