@@ -6,15 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.devambrosov.searchf2.databinding.FragmentHomeBinding
+import java.util.*
 
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private  val binding get() = _binding!!
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
+
 
     private val filmsDataBase = listOf(
         Film("Avengers", R.drawable.avengers1, "Cool blokbaster. The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe."),
@@ -56,6 +59,35 @@ class HomeFragment : Fragment() {
         }
         //Кладем нашу БД в RV
         filmsAdapter.addItems(filmsDataBase)
+
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
+        }
+
+        //Подключаем слушателя изменений введенного текста в поиска
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            //Этот метод отрабатывает при нажатии кнопки "поиск" на софт клавиатуре
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            //Этот метод отрабатывает на каждое изменения текста
+            override fun onQueryTextChange(newText: String): Boolean {
+                //Если ввод пуст то вставляем в адаптер всю БД
+                if (newText.isEmpty()) {
+                    filmsAdapter.addItems(filmsDataBase)
+                    return true
+                }
+                //Фильтруем список на поискк подходящих сочетаний
+                val result = filmsDataBase.filter {
+                    //Чтобы все работало правильно, нужно и запрос, и имя фильма приводить к нижнему регистру
+                    it.title!!.toLowerCase(Locale.getDefault()).contains(newText.toLowerCase(Locale.getDefault()))
+                }
+                //Добавляем в адаптер
+                filmsAdapter.addItems(result)
+                return true
+            }
+        })
 
     }
 
