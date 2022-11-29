@@ -1,24 +1,27 @@
+@file:Suppress("DEPRECATION")
+
 package ru.devambrosov.searchf2
 
 import android.os.Bundle
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import ru.devambrosov.searchf2.R.anim.card_anim
 import ru.devambrosov.searchf2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        //val cardAnimation = AnimationUtils.loadAnimation(this, card_anim)
-        //view.startAnimation(cardAnimation)
-
-        //initCards()
+        //Зупускаем фрагмент при старте
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
 
         binding.topAppBarMenu.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -34,7 +37,11 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_placeholder, FavoritesFragment())
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
                 R.id.watch_later -> {
@@ -48,29 +55,22 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
-
-
     }
+    fun launchDetailsFragment(film: Film) {
+        //Создаем "посылку"
+        val bundle = Bundle()
+        //Кладем наш фильм в "посылку"
+        bundle.putParcelable("film", film)
+        //Кладем фрагмент с деталями в перменную
+        val fragment = DetailsFragment()
+        //Прикрепляем нашу "посылку" к фрагменту
+        fragment.arguments = bundle
 
-
-
-
-   /* private fun initCards() {
-        binding.pirates.setOnClickListener {
-             Toast.makeText(this, "Меню", Toast.LENGTH_SHORT).show()
-        }
-        binding.monroe.setOnClickListener {
-            Toast.makeText(this, "Избранное", Toast.LENGTH_SHORT).show()
-        }
-        binding.friends.setOnClickListener {
-            Toast.makeText(this, "Категории", Toast.LENGTH_SHORT).show()
-        }
-        binding.blackPanter.setOnClickListener {
-            Toast.makeText(this, "Продолжить просмотр", Toast.LENGTH_SHORT).show()
-        }
-
-    } */
-
-
+        //Запускаем фрагмент
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 }
