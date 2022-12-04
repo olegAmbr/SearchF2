@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.devambrosov.searchf2.databinding.FragmentFavoritesBinding
 
 class FavoritesFragment : Fragment() {
-    private var _binding: FragmentFavoritesBinding? = null
-    private  val binding get() = _binding!!
+    private lateinit  var _binding: FragmentFavoritesBinding
+    private  val binding get() = _binding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFavoritesBinding.inflate(inflater, container, false)
         return binding.root
         // Inflate the layout for this fragment
