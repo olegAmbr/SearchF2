@@ -1,8 +1,13 @@
-@file:Suppress("UNREACHABLE_CODE")
+@file:Suppress("UNREACHABLE_CODE", "DEPRECATION")
 
 package ru.devambrosov.searchf2
 
 import android.os.Bundle
+import android.transition.Scene
+import android.transition.Slide
+import android.transition.TransitionManager
+import android.transition.TransitionSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +15,17 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.devambrosov.searchf2.databinding.FragmentHomeBinding
+import ru.devambrosov.searchf2.databinding.MergeHomeScreenContentBinding
 import java.util.*
 
 
 class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: MergeHomeScreenContentBinding? = null
     private  val binding get() = _binding!!
+
+    private var _binding1: FragmentHomeBinding? = null
+    private  val binding1 get() = _binding1!!
+
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
 
@@ -29,18 +39,45 @@ class HomeFragment : Fragment() {
         Film("The dark knight", R.drawable.the_dark_knight, "Blokbaster. When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.")
     )
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = MergeHomeScreenContentBinding.inflate(inflater, container, false)
+        _binding1 = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
-       // return inflater.inflate(R.layout.fragment_home, container, false)
+        return binding1.root
+
+       //return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val scene = Scene.getSceneForLayout(binding1.homeFragmentRoot,
+            R.layout.merge_home_screen_content, requireContext())
+        //Создаем анимацию выезда поля поиска сверху
+        val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
+//Создаем анимацию выезда RV снизу
+        val recyclerSlide = Slide(Gravity.BOTTOM).addTarget(R.id.main_recycler)
+//Создаем экземпляр TransitionSet, который объединит все наши анимации
+        val customTransition = TransitionSet().apply {
+            //Устанавливаем время, за которое будет проходить анимация
+            duration = 500
+            //Добавляем сами анимации
+            addTransition(recyclerSlide)
+            addTransition(searchSlide)
+        }
+//Также запускаем через TransitionManager, но вторым параметром передаем нашу кастомную анимацию
+        TransitionManager.go(scene, customTransition)
+
+
 
         //находим наш RV
         binding.mainRecycler.apply {
@@ -51,7 +88,7 @@ class HomeFragment : Fragment() {
             })
             //Присваиваем адаптер
             adapter = filmsAdapter
-            //Присвои layoutmanager
+            //Присвои layoutManager
             layoutManager = LinearLayoutManager(requireContext())
             //Применяем декоратор для отступов
             val decorator = TopSpacingItemDecoration(8)
