@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package ru.devambrosov.searchf2
 
 import android.os.Bundle

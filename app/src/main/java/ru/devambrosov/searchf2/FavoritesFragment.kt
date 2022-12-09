@@ -1,5 +1,3 @@
-@file:Suppress("UNREACHABLE_CODE")
-
 package ru.devambrosov.searchf2
 
 import android.os.Bundle
