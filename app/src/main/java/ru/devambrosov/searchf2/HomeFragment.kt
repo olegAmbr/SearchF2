@@ -1,13 +1,6 @@
-@file:Suppress("UNREACHABLE_CODE", "DEPRECATION")
-
 package ru.devambrosov.searchf2
 
 import android.os.Bundle
-import android.transition.Scene
-import android.transition.Slide
-import android.transition.TransitionManager
-import android.transition.TransitionSet
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,19 +8,14 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.devambrosov.searchf2.databinding.FragmentHomeBinding
-import ru.devambrosov.searchf2.databinding.MergeHomeScreenContentBinding
 import java.util.*
 
-
 class HomeFragment : Fragment() {
-    private var _binding: MergeHomeScreenContentBinding? = null
+
+    private var _binding: FragmentHomeBinding? = null
     private  val binding get() = _binding!!
 
-    private var _binding1: FragmentHomeBinding? = null
-    private  val binding1 get() = _binding1!!
-
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
-
 
     private val filmsDataBase = listOf(
         Film("Avengers", R.drawable.avengers1, "Cool blokbaster. The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe."),
@@ -38,30 +26,29 @@ class HomeFragment : Fragment() {
         Film("One plus one", R.drawable.one_plus_one, "Heart-pearsing drum and comedy"),
         Film("The dark knight", R.drawable.the_dark_knight, "Blokbaster. When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.")
     )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
     }
-
-    override fun onCreateView(
+       override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
     ): View {
-        _binding = MergeHomeScreenContentBinding.inflate(inflater, container, false)
-        _binding1 = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-        return binding1.root
 
-       //return inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+
+     //  return inflater.inflate(layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val scene = Scene.getSceneForLayout(binding1.homeFragmentRoot,
-            R.layout.merge_home_screen_content, requireContext())
+        AnimationHelper.AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
+
+    /*    val scene = Scene.getSceneForLayout(binding1.homeFragmentRoot,
+            layout.merge_home_screen_content, requireContext())
         //Создаем анимацию выезда поля поиска сверху
         val searchSlide = Slide(Gravity.TOP).addTarget(R.id.search_view)
 //Создаем анимацию выезда RV снизу
@@ -75,27 +62,7 @@ class HomeFragment : Fragment() {
             addTransition(searchSlide)
         }
 //Также запускаем через TransitionManager, но вторым параметром передаем нашу кастомную анимацию
-        TransitionManager.go(scene, customTransition)
-
-
-
-        //находим наш RV
-        binding.mainRecycler.apply {
-            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
-                override fun click(film: Film) {
-                    (requireActivity() as MainActivity).launchDetailsFragment(film)
-                }
-            })
-            //Присваиваем адаптер
-            adapter = filmsAdapter
-            //Присвои layoutManager
-            layoutManager = LinearLayoutManager(requireContext())
-            //Применяем декоратор для отступов
-            val decorator = TopSpacingItemDecoration(8)
-            addItemDecoration(decorator)
-        }
-        //Кладем нашу БД в RV
-        filmsAdapter.addItems(filmsDataBase)
+        TransitionManager.go(scene, customTransition) */
 
         binding.searchView.setOnClickListener {
             binding.searchView.isIconified = false
@@ -120,12 +87,34 @@ class HomeFragment : Fragment() {
                     //Чтобы все работало правильно, нужно и запрос, и имя фильма приводить к нижнему регистру
                     it.title!!.lowercase(Locale.getDefault()).contains(newText.lowercase(Locale.getDefault()))
                 }
+
                 //Добавляем в адаптер
                 filmsAdapter.addItems(result)
                 return true
             }
         })
 
+        //находим наш RV
+        initRecyckler()
+        //Кладем нашу БД в RV
+        filmsAdapter.addItems(filmsDataBase)
     }
-
+    //находим наш RV
+    private fun initRecyckler(){
+        binding.mainRecycler.apply {
+            filmsAdapter =
+                FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
+                    override fun click(film: Film) {
+                        (requireActivity() as MainActivity).launchDetailsFragment(film)
+                    }
+                })
+            //Присваиваем адаптер
+            adapter = filmsAdapter
+            //Присвои layoutManager
+            layoutManager = LinearLayoutManager(requireContext())
+            //Применяем декоратор для отступов
+            val decorator = TopSpacingItemDecoration(8)
+            addItemDecoration(decorator)
+        }
+    }
 }

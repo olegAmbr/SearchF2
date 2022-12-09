@@ -3,7 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="ExtraText">
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/ic_round_home_24"
+        android:title="@string/home"
+        app:showAsAction="withText"/>
     <item
         android:id="@+id/favorites"
         android:icon="@drawable/ic_round_thumb_up_24"
@@ -12,12 +17,12 @@
     <item
         android:id="@+id/watch_later"
         android:icon="@drawable/ic_round_watch_later_24"
-        android:title="@string/category"
+        android:title="@string/watch_later"
         app:showAsAction="withText"/>
     <item
         android:id="@+id/selections"
         android:icon="@drawable/ic_round_category_24"
-        android:title="@string/continue_watching"
+        android:title="@string/selections"
         app:showAsAction="withText"/>
 
 </menu>

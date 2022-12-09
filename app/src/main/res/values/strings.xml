@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">SearchF2</string>
     <string name="favorites">Избранное</string>
-    <string name="category">Категории</string>
-    <string name="continue_watching">Продолжить просмотр</string>
+    <string name="watch_later">Смотреть позже</string>
+    <string name="selections">Подборки</string>
     <string name="menu_settings_title">settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Домой</string>
 </resources>
