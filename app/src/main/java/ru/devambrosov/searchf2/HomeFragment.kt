@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.devambrosov.searchf2.databinding.FragmentHomeBinding
 import java.util.*
 
+@Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null

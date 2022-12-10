@@ -5,13 +5,17 @@ import android.os.Parcelable
 
 @Parcelize
 data class Film(
-    val title: String?, val poster: Int, val description: String?, var isInFavorites: Boolean = false
+    val title: String?,
+    val poster: Int,
+    val description: String?,
+    var isInFavorites: Boolean = false
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readInt(),
         parcel.readString(),
-        parcel.readByte() != 0.toByte())
+        parcel.readByte() != 0.toByte()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)

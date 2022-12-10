@@ -10,9 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.devambrosov.searchf2.databinding.FragmentDetailsBinding
 
-
 class DetailsFragment : Fragment() {
-   private var _binding: FragmentDetailsBinding? = null
+    private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var film: Film
 
@@ -38,7 +37,7 @@ class DetailsFragment : Fragment() {
             }
         }
 
-       binding.detailsFabShare.setOnClickListener {
+        binding.detailsFabShare.setOnClickListener {
             //Создаем интент
             val intent = Intent()
             //Укзываем action с которым он запускается
@@ -71,6 +70,4 @@ class DetailsFragment : Fragment() {
             else R.drawable.thumb_up_not_liked_off_alt_24
         )
     }
-
-
 }

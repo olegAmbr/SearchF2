@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.devambrosov.searchf2.databinding.FragmentWatchLaterBinding
 
-
 class WatchLaterFragment : Fragment() {
 
     private lateinit  var _binding: FragmentWatchLaterBinding
@@ -16,7 +15,7 @@ class WatchLaterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentWatchLaterBinding.inflate(inflater, container, false)
         return binding.root
     }
