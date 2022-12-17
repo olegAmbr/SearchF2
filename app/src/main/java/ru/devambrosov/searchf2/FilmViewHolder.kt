@@ -29,5 +29,7 @@ class FilmViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             .into(binding.poster)
         //Устанавливаем описание
         binding.description.text = film.description
+        //Устанавливаем рэйтинг
+        binding.ratingDonut.setProgress((film.rating * 10).toInt())
     }
 }
