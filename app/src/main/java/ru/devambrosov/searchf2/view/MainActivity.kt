@@ -1,20 +1,23 @@
-@file:Suppress("DEPRECATION")
-
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.view
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import ru.devambrosov.searchf2.R
 import ru.devambrosov.searchf2.databinding.ActivityMainBinding
+import ru.devambrosov.searchf2.domain.Film
+import ru.devambrosov.searchf2.view.fragments.*
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        // val view = binding.root
+        setContentView(binding.root)
 
         //Зупускаем фрагмент при старте
         supportFragmentManager
@@ -33,29 +36,51 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        fun changeFragment(fragment: Fragment, tag: String) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_placeholder, fragment, tag)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        fun checkFragmentExistence(tag: String): Fragment? =
+            supportFragmentManager.findFragmentByTag(tag)
+
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
+                R.id.home -> {
+                    val tag = "home"
+                    val fragment = checkFragmentExistence(tag)
+                    //В первом параметре, если фрагмент не найден и метод вернул null, то с помощью
+                    //элвиса мы вызываем создание нового фрагмента
+                    changeFragment(fragment ?: HomeFragment(), tag)
+                    true
+                }
                 R.id.favorites -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_placeholder, FavoritesFragment())
-                        .addToBackStack(null)
-                        .commit()
+                    val tag = "favorites"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: FavoritesFragment(), tag)
                     true
                 }
                 R.id.watch_later -> {
-                    Toast.makeText(this, "Категории", Toast.LENGTH_SHORT).show()
+                    val tag = "watch_later"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: WatchLaterFragment(), tag)
                     true
                 }
                 R.id.selections -> {
-                    Toast.makeText(this, "Продолжить просмотр", Toast.LENGTH_SHORT).show()
+                    val tag = "selections"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: SelectionsFragment(), tag)
                     true
                 }
                 else -> false
             }
         }
     }
+
     fun launchDetailsFragment(film: Film) {
         //Создаем "посылку"
         val bundle = Bundle()

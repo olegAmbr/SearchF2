@@ -1,4 +1,4 @@
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.view.rv_adapters
 
 import android.content.res.Resources
 import android.graphics.Rect
@@ -14,6 +14,5 @@ class TopSpacingItemDecoration (private val paddingInDp: Int): RecyclerView.Item
         outRect.top = paddingInDp.convertPx
         outRect.right = paddingInDp.convertPx
         outRect.left = paddingInDp.convertPx
-
     }
 }

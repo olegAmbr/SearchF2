@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,11 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import ru.devambrosov.searchf2.R
 import ru.devambrosov.searchf2.databinding.FragmentDetailsBinding
-
+import ru.devambrosov.searchf2.domain.Film
 
 class DetailsFragment : Fragment() {
-   private var _binding: FragmentDetailsBinding? = null
+    private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
     private lateinit var film: Film
 
@@ -38,7 +39,7 @@ class DetailsFragment : Fragment() {
             }
         }
 
-       binding.detailsFabShare.setOnClickListener {
+        binding.detailsFabShare.setOnClickListener {
             //Создаем интент
             val intent = Intent()
             //Укзываем action с которым он запускается
@@ -71,6 +72,4 @@ class DetailsFragment : Fragment() {
             else R.drawable.thumb_up_not_liked_off_alt_24
         )
     }
-
-
 }
