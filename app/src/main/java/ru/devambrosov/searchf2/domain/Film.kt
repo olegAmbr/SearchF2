@@ -1,4 +1,4 @@
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.domain
 
 import android.os.Parcel
 import android.os.Parcelable

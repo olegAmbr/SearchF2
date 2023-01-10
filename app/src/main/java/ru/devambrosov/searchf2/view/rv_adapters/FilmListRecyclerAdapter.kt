@@ -1,9 +1,12 @@
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.view.rv_adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.devambrosov.searchf2.view.rv_viewholders.FilmViewHolder
+import ru.devambrosov.searchf2.R
+import ru.devambrosov.searchf2.domain.Film
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса Activity
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :

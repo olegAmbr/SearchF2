@@ -1,4 +1,4 @@
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.devambrosov.searchf2.R
 import ru.devambrosov.searchf2.databinding.FragmentHomeBinding
+import ru.devambrosov.searchf2.domain.Film
+import ru.devambrosov.searchf2.utils.AnimationHelper
+import ru.devambrosov.searchf2.view.MainActivity
+import ru.devambrosov.searchf2.view.rv_adapters.FilmListRecyclerAdapter
+import ru.devambrosov.searchf2.view.rv_adapters.TopSpacingItemDecoration
+import ru.devambrosov.searchf2.viewmodel.HomeFragmentViewModel
 import java.util.*
 
 @Suppress("DEPRECATION")
@@ -18,15 +27,22 @@ class HomeFragment : Fragment() {
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
-    private val filmsDataBase = listOf(
-        Film("Avengers", R.drawable.avengers1, "Cool blokbaster. The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.", 8.8f),
-        Film("Back to future", R.drawable.back_to_future, "Good fantastic film. Marty McFly, a 17-year-old high school student, is accidentally sent 30 years into the past in a time-traveling DeLorean invented by his close friend, the maverick scientist Doc Brown.",7.5f),
-        Film("Fight club", R.drawable.fight_club, "Thriller. An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.", 6.5f),
-        Film("Joker", R.drawable.joker, "Drum. A mentally troubled stand-up comedian embarks on a downward spiral that leads to the creation of an iconic villain.", 3.3f),
-        Film("The lord of the rings", R.drawable.lor, "Great fantasy. Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.", 5.5f),
-        Film("One plus one", R.drawable.one_plus_one, "Heart-pearsing drum and comedy", 8.5f),
-        Film("The dark knight", R.drawable.the_dark_knight, "Blokbaster. When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.", 7.5f)
-    )
+    private val viewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
+    }
+
+    private var filmsDataBase = listOf<Film>()
+        //Используем backing field
+        set(value) {
+            //Если придет такое же значение, то мы выходим из метода
+            if (field == value) return
+            //Если пришло другое значение, то кладем его в переменную
+            field = value
+            //Обновляем RV адаптер
+            filmsAdapter.addItems(field)
+        }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -47,6 +63,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         AnimationHelper.AnimationHelper.performFragmentCircularRevealAnimation(binding.homeFragmentRoot, requireActivity(), 1)
+
+
 
     /*    val scene = Scene.getSceneForLayout(binding1.homeFragmentRoot,
             layout.merge_home_screen_content, requireContext())
@@ -98,7 +116,9 @@ class HomeFragment : Fragment() {
         //находим наш RV
         initRecyckler()
         //Кладем нашу БД в RV
-        filmsAdapter.addItems(filmsDataBase)
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
+            filmsDataBase = it
+        })
     }
     //находим наш RV
     private fun initRecyckler(){

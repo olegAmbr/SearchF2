@@ -1,4 +1,4 @@
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.devambrosov.searchf2.view.rv_adapters.FilmListRecyclerAdapter
+import ru.devambrosov.searchf2.view.MainActivity
+import ru.devambrosov.searchf2.view.rv_adapters.TopSpacingItemDecoration
 import ru.devambrosov.searchf2.databinding.FragmentFavoritesBinding
+import ru.devambrosov.searchf2.domain.Film
+import ru.devambrosov.searchf2.utils.AnimationHelper
 
 class FavoritesFragment : Fragment() {
     private lateinit  var _binding: FragmentFavoritesBinding
@@ -32,7 +37,7 @@ class FavoritesFragment : Fragment() {
         AnimationHelper.AnimationHelper.performFragmentCircularRevealAnimation(binding.favoritesFragmentRoot, requireActivity(), 1)
 
         binding.favoritesRecycler.apply {
-                filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
+                filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
                         (requireActivity() as MainActivity).launchDetailsFragment(film)
                     }

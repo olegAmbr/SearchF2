@@ -11,7 +11,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
+import ru.devambrosov.searchf2.view.MainActivity
+import ru.devambrosov.searchf2.view.rv_viewholders.FilmViewHolder
 
 
 @RunWith(AndroidJUnit4::class)

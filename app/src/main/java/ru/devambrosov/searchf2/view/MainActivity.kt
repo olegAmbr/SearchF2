@@ -1,10 +1,13 @@
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.view
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import ru.devambrosov.searchf2.R
 import ru.devambrosov.searchf2.databinding.ActivityMainBinding
+import ru.devambrosov.searchf2.domain.Film
+import ru.devambrosov.searchf2.view.fragments.*
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -13,8 +16,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        // val view = binding.root
+        setContentView(binding.root)
 
         //Зупускаем фрагмент при старте
         supportFragmentManager

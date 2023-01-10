@@ -1,4 +1,4 @@
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.utils
 
 import android.app.Activity
 import android.view.View

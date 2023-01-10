@@ -1,9 +1,10 @@
-package ru.devambrosov.searchf2
+package ru.devambrosov.searchf2.view.customviews
 
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
+import ru.devambrosov.searchf2.R
 
 class RatingDonutView @JvmOverloads
 constructor(context: Context, attributeSet: AttributeSet? = null) : View(context, attributeSet) {
