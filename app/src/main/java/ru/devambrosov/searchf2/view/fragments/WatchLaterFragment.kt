@@ -10,8 +10,8 @@ import ru.devambrosov.searchf2.utils.AnimationHelper
 
 class WatchLaterFragment : Fragment() {
 
-    private lateinit  var _binding: FragmentWatchLaterBinding
-    private  val binding get() = _binding
+    private lateinit var _binding: FragmentWatchLaterBinding
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,8 +20,13 @@ class WatchLaterFragment : Fragment() {
         _binding = FragmentWatchLaterBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        AnimationHelper.AnimationHelper.performFragmentCircularRevealAnimation(binding.watchLaterFragmentRoot, requireActivity(), 4)
+        AnimationHelper.AnimationHelper.performFragmentCircularRevealAnimation(
+            binding.watchLaterFragmentRoot,
+            requireActivity(),
+            4
+        )
     }
 }
