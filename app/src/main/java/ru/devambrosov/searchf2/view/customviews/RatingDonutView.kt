@@ -10,16 +10,21 @@ class RatingDonutView @JvmOverloads
 constructor(context: Context, attributeSet: AttributeSet? = null) : View(context, attributeSet) {
     //Овал для рисования сегментов прогресс бара
     private val oval = RectF()
+
     //Координаты центра View, а также Radius
     private var radius: Float = 0f
     private var centerX: Float = 0f
     private var centerY: Float = 0f
+
     //Толщина линии прогресса
     private var stroke = 11f
+
     //Значение прогресса от 0 - 100
     private var progress = 50
+
     //Значения размера текста внутри кольца
     private var scaleSize = 60f
+
     //Краски для наших фигур
     private lateinit var strokePaint: Paint
     private lateinit var digitPaint: Paint
@@ -31,7 +36,8 @@ constructor(context: Context, attributeSet: AttributeSet? = null) : View(context
             context.theme.obtainStyledAttributes(attributeSet, R.styleable.RatingDonutView, 0, 0)
         try {
             stroke = a.getFloat(
-                R.styleable.RatingDonutView_stroke, stroke)
+                R.styleable.RatingDonutView_stroke, stroke
+            )
             progress = a.getInt(R.styleable.RatingDonutView_progress, progress)
         } finally {
             a.recycle()
@@ -98,12 +104,14 @@ constructor(context: Context, attributeSet: AttributeSet? = null) : View(context
             color = Color.DKGRAY
         }
     }
-    private fun getPaintColor(progress: Int): Int = when(progress) {
-        in 0 .. 25 -> Color.parseColor("#e84258")
-        in 26 .. 50 -> Color.parseColor("#fd8060")
-        in 51 .. 75 -> Color.parseColor("#fee191")
+
+    private fun getPaintColor(progress: Int): Int = when (progress) {
+        in 0..25 -> Color.parseColor("#e84258")
+        in 26..50 -> Color.parseColor("#fd8060")
+        in 51..75 -> Color.parseColor("#fee191")
         else -> Color.parseColor("#b0d8a4")
     }
+
     private fun drawRating(canvas: Canvas) {
         //Здесь мы можем регулировать размер нашего кольца
         val scale = radius * 0.8f
@@ -112,7 +120,7 @@ constructor(context: Context, attributeSet: AttributeSet? = null) : View(context
         //Перемещаем нулевые координаты канваса в центр, вы помните, так проще рисовать все круглое
         canvas.translate(centerX, centerY)
         //Устанавливаем размеры под наш овал
-        oval.set(0f - scale, 0f - scale, scale , scale)
+        oval.set(0f - scale, 0f - scale, scale, scale)
         //Рисуем задний фон(Желательно его отрисовать один раз в bitmap, так как он статичный)
         canvas.drawCircle(0f, 0f, radius, circlePaint)
         //Рисуем "арки", из них и будет состоять наше кольцо + у нас тут специальный метод
@@ -120,6 +128,7 @@ constructor(context: Context, attributeSet: AttributeSet? = null) : View(context
         //Восстанавливаем канвас
         canvas.restore()
     }
+
     private fun convertProgressToDegrees(progress: Int): Float = progress * 3.6f
 
     private fun drawText(canvas: Canvas) {
@@ -132,7 +141,7 @@ constructor(context: Context, attributeSet: AttributeSet? = null) : View(context
         var advance = 0f
         for (width in widths) advance += width
         //Рисуем наш текст
-        canvas.drawText(message, centerX - advance / 2, centerY  + advance / 4, digitPaint)
+        canvas.drawText(message, centerX - advance / 2, centerY + advance / 4, digitPaint)
     }
 
     override fun onDraw(canvas: Canvas) {
